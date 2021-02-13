@@ -1,0 +1,15 @@
+version: "3.4"
+
+services:
+  backend:
+    build:
+      context: backend/
+    environment:
+      SHOPPING_DATABASE_URI: mongodb://mongodb:27017/shopping
+    ports:
+      - 8000:80
+  
+  mongodb:
+    image: mongo:3
+    ports:
+      - 27017:27017
