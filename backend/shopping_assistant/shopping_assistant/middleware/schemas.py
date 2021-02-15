@@ -10,14 +10,12 @@ class OID(str):
     @classmethod
     def validate(cls, v):
         try:
-            print('validating object id')
             return ObjectId(str(v))
         except InvalidId:
             raise ValueError("Not a valid ObjectId")
 
 
 def serialize_object_id(oid):
-    print('serializing object id')
     return str(oid)
 
 
