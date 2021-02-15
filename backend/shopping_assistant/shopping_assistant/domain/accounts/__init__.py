@@ -12,6 +12,11 @@ router = APIRouter()
 accounts_db = AccountsDatabase()
 
 
+@router.get("/accounts/me", response_model=Account)
+def get_account_from_token(current_account=authenticated_account):
+    return current_account
+
+
 @router.get("/accounts/{account_uid}", response_model=Account, dependencies=[authenticated_account])
 def get_account(account_uid: str):
     return accounts_db.get(account_uid)
