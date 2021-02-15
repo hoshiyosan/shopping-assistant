@@ -1,28 +1,65 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <main-navigation :title="app.title" />
+
+    <v-sheet style="position: relative; height: 100%">
+      <v-container>
+        <router-view />
+      </v-container>
+
+      <side-navigation
+        :title="title"
+        :subtitle="subtitle"
+        :nav-items="navItems"
+        v-if="!$vuetify.breakpoint.mobile"
+      />
+    </v-sheet>
+
+    <bottom-navigation
+      :title="title"
+      :subtitle="subtitle"
+      :nav-items="navItems"
+      v-if="$vuetify.breakpoint.mobile"
+    />
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MainNavigation from "@/views/Navigation/MainNavigation";
+import SideNavigation from "@/views/Navigation/SideNavigation";
+import BottomNavigation from "@/views/Navigation/BottomNavigation";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  components: { MainNavigation, SideNavigation, BottomNavigation },
+  data() {
+    return {
+      app: {
+        title: "Shopping Assistant",
+        subtitle: "Manage your ingredients!",
+      },
+      navItems: [
+        {
+          title: "Recettes",
+          route: "Recipes",
+          icon: "mdi-noodles",
+        },
+        {
+          title: "Mes listes",
+          route: "ShoppingLists",
+          icon: "mdi-clipboard-list",
+        },
+        {
+          title: "Mon caddy",
+          route: "ShoppingCart",
+          icon: "mdi-cart",
+        },
+        {
+          title: "Mon frigo",
+          route: "Fridge",
+          icon: "mdi-fridge",
+        },
+      ],
+    };
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
