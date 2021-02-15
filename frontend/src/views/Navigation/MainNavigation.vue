@@ -7,12 +7,8 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-account-circle</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-power</v-icon>
+      <v-btn icon v-for="(action, index) in navActions" :key="index" @click="action.callback">
+        <v-icon>{{action.icon}}</v-icon>
       </v-btn>
     </v-app-bar>
   </div>
@@ -23,6 +19,7 @@ export default {
   props: {
     title: String,
     subtitle: String,
+    navActions: Array
   },
 };
 </script>

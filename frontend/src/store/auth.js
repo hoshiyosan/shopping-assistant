@@ -10,8 +10,12 @@ export default {
     mutations: {
         setToken(state, token) {
             http.defaults.headers.common['Authorization'] = token ? `Bearer ${token}` : null;
-            localStorage.setItem(STORED_TOKEN, token);
             state.authenticated = token ? true : false;
+            if(token){
+                localStorage.setItem(STORED_TOKEN, token);
+            }else{
+                localStorage.removeItem(STORED_TOKEN);
+            }
         }
     },
     actions: {
@@ -32,6 +36,13 @@ export default {
         fromLocalStorage() {
             const token = localStorage.getItem(STORED_TOKEN);
             console.log(token);
+        },
+
+        /**
+         * Delete credentials from localStorage and app context
+         */
+        logout({commit}){
+            commit('setToken', null);
         }
     },
 }

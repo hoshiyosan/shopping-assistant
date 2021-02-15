@@ -9,6 +9,8 @@ import ShoppingLists from '@/views/ShoppingLists'
 import ShoppingCart from '@/views/ShoppingCart'
 import Fridge from '@/views/Fridge'
 
+import EditAccountInfo from '@/views/Account/EditAccountInfo'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -41,6 +43,11 @@ const routes = [
     path: '/mon-frigo',
     name: 'Fridge',
     component: Fridge
+  },
+  {
+    path: '/mon-compte',
+    name: 'EditAccountInfo',
+    component: EditAccountInfo
   }
 ]
 

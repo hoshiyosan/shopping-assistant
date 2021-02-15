@@ -1,6 +1,10 @@
 <template>
   <v-app>
-    <main-navigation :title="app.title" :subtitle="app.subtitle" />
+    <main-navigation
+      :title="app.title"
+      :subtitle="app.subtitle"
+      :nav-actions="navActions"
+    />
 
     <v-sheet style="position: relative; height: 100%">
       <v-container>
@@ -8,16 +12,12 @@
       </v-container>
 
       <side-navigation
-        :title="title"
-        :subtitle="subtitle"
         :nav-items="navItems"
         v-if="!$vuetify.breakpoint.mobile"
       />
     </v-sheet>
 
     <bottom-navigation
-      :title="title"
-      :subtitle="subtitle"
       :nav-items="navItems"
       v-if="$vuetify.breakpoint.mobile"
     />
@@ -57,6 +57,26 @@ export default {
           title: "Mon frigo",
           route: "Fridge",
           icon: "mdi-fridge",
+        },
+      ],
+      navActions: [
+        {
+          icon: "mdi-account-circle",
+          callback: () => {
+            // [EditAccountInfo] redirect to EditAccountInfo page
+            if (this.$route.name !== "EditAccountInfo")
+              this.$router.push({ name: "EditAccountInfo" });
+          },
+        },
+        {
+          icon: "mdi-power",
+          callback: () => {
+            // [logout] remove credentials and redirect to login if necessary
+            this.$store.dispatch("auth/logout").then(() => {
+              if (this.$route.name !== "Login")
+                this.$router.push({ name: "Login" });
+            });
+          },
         },
       ],
     };
