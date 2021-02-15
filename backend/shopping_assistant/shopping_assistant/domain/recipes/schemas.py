@@ -11,11 +11,9 @@ class IngredientQuantity(BaseModel):
 class RecipeSummary(MongoModel):
     name: str
     diners: float
+    thumbnail: str = None
 
 
-class Recipe(MongoModel):
-    name: str
-    diners: float
+class Recipe(RecipeSummary):
     ingredients: List[IngredientQuantity] = []
     steps: List[str] = []
-
