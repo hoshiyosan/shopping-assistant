@@ -5,6 +5,7 @@
         v-for="item in navItems"
         :key="item.title"
         :to="{ name: item.route }"
+        :title="item.title"
         link
       >
         <v-list-item-icon>

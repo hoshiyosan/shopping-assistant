@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <main-navigation :title="app.title" />
+    <main-navigation :title="app.title" :subtitle="app.subtitle" />
 
     <v-sheet style="position: relative; height: 100%">
       <v-container>
