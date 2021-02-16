@@ -16,7 +16,7 @@ export class APIObject {
 
     search(query) {
         return new Promise((resolve, reject) => {
-            http.get(`${this.baseURI}?q=${query}`)
+            http.get(`${this.baseURI}?query=${query}`)
                 .then(response => resolve(response.data))
                 .catch(() => reject(`Search request for ${this.object} failed`));
         })

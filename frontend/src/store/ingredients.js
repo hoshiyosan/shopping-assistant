@@ -6,7 +6,8 @@ const ingredientsAPI = new APIObject("ingredient", "/ingredients");
 export default {
     namespaced: true,
     state: {
-        units: []
+        units: [],
+        ingredients: null
     },
     mutations: {
         setUnits(state, units) {
@@ -21,8 +22,28 @@ export default {
         get(context, ingredientUID) {
             return ingredientsAPI.get(ingredientUID);
         },
-        search(context, query) {
-            return ingredientsAPI.search(query);
+        localSearch({ state }, query) {
+            return new Promise(resolve => {
+                const regex = new RegExp(query, "i");
+                const matches = state.ingredients.filter(ingredient => ingredient.name.match(regex));
+                resolve(matches);
+            })
+        },
+        search({ state, dispatch }, query) {
+            return new Promise(resolve => {
+                // TODO: improve weird caching mechanism
+                if (state.ingredients === null) {
+                    ingredientsAPI.search(query)
+                        .then((ingredients) => {
+                            state.ingredients = ingredients;
+                            dispatch('localSearch', query)
+                                .then(matches => resolve(matches))
+                        })
+                } else {
+                    dispatch('localSearch', query)
+                        .then(matches => resolve(matches))
+                }
+            })
         },
         create(context, ingredientData) {
             return ingredientsAPI.create(ingredientData);

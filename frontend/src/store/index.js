@@ -6,6 +6,7 @@ import auth from './auth'
 import accounts from './accounts'
 import recipes from './recipes'
 import ingredients from './ingredients'
+import shoppinglists from './shoppinglists'
 
 Vue.use(Vuex)
 
@@ -14,7 +15,8 @@ export default new Vuex.Store({
     auth,
     accounts,
     recipes,
-    ingredients
+    ingredients,
+    shoppinglists
   },
   actions: {
     initApp({ dispatch }) {

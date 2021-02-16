@@ -1,11 +1,11 @@
 <template>
   <main v-if="recipe">
     <v-tabs
+      v-model="currentTab"
       fixed-tabs
       background-color="secondary"
       center-active
       dark
-      v-model="currentTab"
     >
       <v-tab href="#informations" key="recipe-info">Recette</v-tab>
       <v-tab href="#ingredients">Ingrédients</v-tab>
@@ -51,6 +51,9 @@
 
     <v-btn color="primary" @click="saveRecipe()">
       <v-icon>mdi-content-save</v-icon> Enregistrer
+    </v-btn>
+    <v-btn color="red" dark @click="deleteRecipe()">
+      <v-icon>mdi-delete</v-icon> Supprimer
     </v-btn>
   </main>
 </template>

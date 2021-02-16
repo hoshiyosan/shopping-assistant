@@ -1,8 +1,6 @@
 <template>
   <div>
     <v-app-bar color="primary" dark dense>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
       <v-toolbar-title :title="subtitle">{{ title }}</v-toolbar-title>
 
       <v-spacer></v-spacer>

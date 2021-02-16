@@ -8,7 +8,6 @@
     <v-btn color="secondary" @click="addEmptyIngredient()">
       <v-icon>mdi-plus</v-icon> Ajouter un ingrédient
     </v-btn>
-    {{ ingredients }}
   </div>
 </template>
 

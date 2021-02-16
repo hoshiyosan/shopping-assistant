@@ -50,7 +50,7 @@ export default {
         },
         {
           title: "Mes listes",
-          route: "ShoppingLists",
+          route: "BrowseShoppingLists",
           icon: "mdi-clipboard-list",
         },
         {

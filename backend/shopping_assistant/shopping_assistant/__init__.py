@@ -19,3 +19,4 @@ api.include_router(domain.accounts.router, tags=["Accounts"])
 
 api.include_router(domain.ingredients.router, tags=["Ingredients"])
 api.include_router(domain.recipes.router, tags=["Recipes"])
+api.include_router(domain.shoppinglists.router, tags=["Shopping Lists"])

@@ -1,3 +1,4 @@
+import re
 from typing import List
 from fastapi import APIRouter
 from shopping_assistant.dependencies import authenticated_account
@@ -16,8 +17,10 @@ def get_recipe(recipe_uid: str):
 
 
 @router.get("/recipes", response_model=List[RecipeSummary], dependencies=[authenticated_account])
-def search_recipes():
-    return recipes_db.search()
+def search_recipes(query:str=""):
+    return recipes_db.search({
+        "name": {"$regex": re.compile(query, re.IGNORECASE)}
+    })
 
 
 @router.post("/recipes", response_model=Recipe, dependencies=[authenticated_account])

@@ -3,17 +3,22 @@ from shopping_assistant.middleware.schemas import MongoModel, BaseModel
 
 
 class IngredientQuantity(BaseModel):
-    ingredient_uid: str
+    ingredient: str
     quantity: float = None
     unit: str = None
 
 
-class RecipeSummary(MongoModel):
+class ShoppingListRecipe(BaseModel):
+    uid: str
     name: str
     diners: float
     thumbnail: str = None
+    
+
+class ShoppingListSummary(MongoModel):
+    name: str
 
 
-class Recipe(RecipeSummary):
+class ShoppingList(ShoppingListSummary):
     ingredients: List[IngredientQuantity] = []
-    steps: List[str] = []
+    recipes: List[ShoppingListRecipe] = []

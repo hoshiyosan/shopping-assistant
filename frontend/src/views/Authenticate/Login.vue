@@ -12,6 +12,13 @@
         />
         <v-btn color="primary" type="submit">Connexion</v-btn>
       </form>
+
+      <div style="margin-top: 1em">
+        or
+        <router-link :to="{ name: 'Register' }">
+          create an account
+        </router-link>
+      </div>
     </v-card-text>
   </v-card>
 </template>

@@ -4,15 +4,19 @@ import store from '@/store'
 
 import Home from '@/views/Home'
 import Login from '@/views/Authenticate/Login'
+import Register from '@/views/Authenticate/Register'
 
-import ShoppingLists from '@/views/ShoppingLists'
+import BrowseRecipes from '@/views/Recipes/BrowseRecipes'
+import EditRecipe from '@/views/Recipes/EditRecipe'
+
+import BrowseShoppingLists from '@/views/ShoppingLists/BrowseShoppingLists'
+import EditShoppingList from '@/views/ShoppingLists/EditShoppingList'
+
 import ShoppingCart from '@/views/ShoppingCart'
 import Fridge from '@/views/Fridge'
 
 import EditAccountInfo from '@/views/Account/EditAccountInfo'
 
-import BrowseRecipes from '@/views/Recipes/BrowseRecipes'
-import EditRecipe from '@/views/Recipes/EditRecipe'
 
 Vue.use(VueRouter)
 
@@ -29,6 +33,12 @@ const routes = [
     meta: { secured: false }
   },
   {
+    path: '/inscription',
+    name: 'Register',
+    component: Register,
+    meta: { secured: false }
+  },
+  {
     path: '/recettes',
     name: 'BrowseRecipes',
     component: BrowseRecipes
@@ -40,8 +50,13 @@ const routes = [
   },
   {
     path: '/shopping/listes',
-    name: 'ShoppingLists',
-    component: ShoppingLists
+    name: 'BrowseShoppingLists',
+    component: BrowseShoppingLists
+  },
+  {
+    path: '/shopping/liste/:shoppingListUID/modifier',
+    name: 'EditShoppingList',
+    component: EditShoppingList
   },
   {
     path: '/shopping/caddy',

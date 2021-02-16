@@ -12,5 +12,10 @@ setuptools.setup(
         "pyjwt==2.0.1",
         "pymongo==3.11.3",
         "uvicorn==0.13.3"
-    ]
+    ],
+    entry_points={
+        "console_scripts": [
+            "shopping=shopping_assistant.__main__:main"
+        ]
+    }
 )
