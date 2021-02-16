@@ -19,7 +19,7 @@ def get_account_from_token(current_account=authenticated_account):
 
 @router.get("/accounts/{account_uid}", response_model=Account, dependencies=[authenticated_account])
 def get_account(account_uid: str):
-    return accounts_db.get(account_uid)
+    return accounts_db.get_by_uid(account_uid)
 
 
 @router.get("/accounts", response_model=List[Account], dependencies=[authenticated_account])

@@ -23,7 +23,7 @@ def list_ingredients_categories():
 
 @router.get("/ingredients/{ingredient_uid}", response_model=Ingredient, dependencies=[authenticated_account])
 def get_ingredient(ingredient_uid: str):
-    return ingredients_db.get(ingredient_uid)
+    return ingredients_db.get_by_uid(ingredient_uid)
 
 
 @router.get("/ingredients", response_model=List[Ingredient], dependencies=[authenticated_account])

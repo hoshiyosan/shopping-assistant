@@ -12,7 +12,7 @@ recipes_db = RecipesDatabase()
 
 @router.get("/recipes/{recipe_uid}", response_model=Recipe, dependencies=[authenticated_account])
 def get_recipe(recipe_uid: str):
-    return recipes_db.get(recipe_uid)
+    return recipes_db.get_by_uid(recipe_uid)
 
 
 @router.get("/recipes", response_model=List[RecipeSummary], dependencies=[authenticated_account])
