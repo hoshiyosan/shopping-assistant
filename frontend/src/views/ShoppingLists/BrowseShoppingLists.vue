@@ -1,6 +1,6 @@
 <template>
   <main style="position: relative">
-    <h2>Listes de courses</h2>
+    <h2><v-icon>mdi-clipboard-list</v-icon> Listes de courses</h2>
 
     <div class="actions" style="position: absolute; right: 0; top: 8px">
       <v-btn fab color="primary" dark small @click="createShoppingList()">

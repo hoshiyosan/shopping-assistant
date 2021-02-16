@@ -1,6 +1,6 @@
 <template>
   <v-container style="position: relative">
-    <h2>Recettes</h2>
+    <h2><v-icon>mdi-noodles</v-icon> Recettes</h2>
 
     <div class="actions" style="position: absolute; right: 0; top: 8px">
       <v-btn fab color="primary" dark small @click="createRecipe()">
