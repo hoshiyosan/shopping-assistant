@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer permanent expand-on-hover absolute>
+  <v-navigation-drawer color="primary" dark permanent expand-on-hover absolute>
     <v-list dense nav>
       <v-list-item
         v-for="item in navItems"

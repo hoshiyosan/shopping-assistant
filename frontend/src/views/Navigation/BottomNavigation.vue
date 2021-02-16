@@ -1,5 +1,5 @@
 <template>
-  <v-bottom-navigation absolute hide-on-scroll grow>
+  <v-bottom-navigation color="primary" absolute hide-on-scroll grow>
     <v-btn
       :to="{ name: item.route }"
       v-for="item in navItems"

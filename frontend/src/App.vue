@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <main-navigation
+      v-if="authenticated"
       :title="app.title"
       :subtitle="app.subtitle"
       :nav-actions="navActions"
@@ -13,24 +14,28 @@
 
       <side-navigation
         :nav-items="navItems"
-        v-if="!$vuetify.breakpoint.mobile"
+        v-if="authenticated && !$vuetify.breakpoint.mobile"
       />
     </v-sheet>
 
     <bottom-navigation
       :nav-items="navItems"
-      v-if="$vuetify.breakpoint.mobile"
+      v-if="authenticated && $vuetify.breakpoint.mobile"
     />
   </v-app>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import MainNavigation from "@/views/Navigation/MainNavigation";
 import SideNavigation from "@/views/Navigation/SideNavigation";
 import BottomNavigation from "@/views/Navigation/BottomNavigation";
 
 export default {
   components: { MainNavigation, SideNavigation, BottomNavigation },
+  computed: {
+    ...mapState("auth", ["authenticated"]),
+  },
   data() {
     return {
       app: {
@@ -40,7 +45,7 @@ export default {
       navItems: [
         {
           title: "Recettes",
-          route: "Recipes",
+          route: "BrowseRecipes",
           icon: "mdi-noodles",
         },
         {
