@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  database:
+    image: mongo:3
+    networks:
+      - internal
+      
+  frontend:
+    image: sylvanld/shopping-frontend
+    networks:
+      - www
+    environment:
+      VUE_APP_BACKEND_URL: http://api.shopping.sylvan.ovh
+    deploy:
+      labels:
+        traefik.enable: "true"
+        traefik.http.routers.shopping-frontend.rule: "Host(`shopping.sylvan.ovh`)"
+        traefik.http.services.shopping-frontend.loadbalancer.server.port: "80"
+        traefik.docker.network: "www"
+    
+  backend:
+    image: sylvanld/shopping-backend
+    networks:
+      - www
+      - internal
+    environment:
+      APP_CORS_ORIGINS: http://shopping.sylvan.ovh
+      SHOPPING_DATABASE_URI: mongodb://database:27017/shopping
+    deploy:
+      labels:
+        traefik.enable: "true"
+        traefik.http.routers.shopping-backend.rule: "Host(`api.shopping.sylvan.ovh`)"
+        traefik.http.services.shopping-backend.loadbalancer.server.port: "80"
+        traefik.docker.network: "www"
+        
+networks:
+  www:
+    external: true
+  internal:
