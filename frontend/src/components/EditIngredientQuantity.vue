@@ -37,10 +37,12 @@ export default {
     return {
       searchIngredient: "",
       ingredientQuantity: null,
-      matchingIngredients: [],
     };
   },
   computed: {
+    matchingIngredients() {
+      return this.$store.getters["ingredients/search"](this.searchIngredient);
+    },
     ...mapState("ingredients", ["units"]),
   },
   props: {
@@ -54,15 +56,7 @@ export default {
       },
     },
   },
-  mounted() {
-    this.queryIngredients();
-  },
   methods: {
-    queryIngredients() {
-      this.$store
-        .dispatch("ingredients/search", this.searchIngredient)
-        .then((ingredients) => (this.matchingIngredients = ingredients));
-    },
     updateProperties(properties) {
       const ingredientQuantity = Object.assign({}, this.ingredientQuantity);
       for (let property of Object.keys(properties)) {

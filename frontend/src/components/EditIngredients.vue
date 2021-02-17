@@ -13,18 +13,19 @@
       <v-icon>mdi-plus</v-icon> Créer un ingrédient
     </v-btn>
 
-    show: {{ showCreateIngredientDialog }}
-
-    <create-ingredient-form v-model="showCreateIngredientDialog" />
+    <create-ingredient-dialog
+      v-model="showCreateIngredientDialog"
+      @created="addIngredient"
+    />
   </div>
 </template>
 
 <script>
 import EditIngredientQuantity from "./EditIngredientQuantity";
-import CreateIngredientForm from "./CreateIngredientForm";
+import CreateIngredientDialog from "./CreateIngredientDialog";
 
 export default {
-  components: { EditIngredientQuantity, CreateIngredientForm },
+  components: { EditIngredientQuantity, CreateIngredientDialog },
   data() {
     return { ingredients: [], showCreateIngredientDialog: false };
   },
@@ -40,8 +41,18 @@ export default {
     },
   },
   methods: {
+    addIngredient(ingredient) {
+      console.log("add ingredient", ingredient);
+      this.ingredients.push({
+        ingredient_uid: ingredient._id,
+        quantity: null,
+        unit: ingredient.unit,
+      });
+      this.$emit("input", this.ingredients);
+    },
     addEmptyIngredient() {
       this.ingredients.push({ ingredient: null, quantity: null, unit: null });
+      this.$emit("input", this.ingredients);
     },
   },
 };

@@ -11,6 +11,13 @@ export default {
         ingredients: null,
         categories: null
     },
+    getters: {
+        search: state => query => {
+            const regex = new RegExp(query, "i");
+            const matches = state.ingredients.filter(ingredient => ingredient.name.match(regex));
+            return matches;
+        }
+    },
     mutations: {
         setUnits(state, units) {
             state.units = [{ name: 'aucune', value: null }, ...units.map(unit => ({ name: unit, value: unit }))];
@@ -45,21 +52,6 @@ export default {
                 const regex = new RegExp(query, "i");
                 const matches = state.ingredients.filter(ingredient => ingredient.name.match(regex));
                 resolve(matches);
-            })
-        },
-        search({ state, dispatch }, query) {
-            return new Promise(resolve => {
-                // TODO: improve weird caching mechanism
-                if (state.ingredients === null) {
-                    dispatch('loadIngredients')
-                        .then(() => {
-                            dispatch('localSearch', query)
-                                .then(matches => resolve(matches))
-                        })
-                } else {
-                    dispatch('localSearch', query)
-                        .then(matches => resolve(matches))
-                }
             })
         },
         create({ dispatch }, ingredientData) {
