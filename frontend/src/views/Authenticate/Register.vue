@@ -3,6 +3,8 @@
     <v-card-text>
       <form @submit.prevent="registerAccount()">
         <h2>Register</h2>
+        <v-text-field label="Prénom" v-model="account.first_name" required />
+        <v-text-field label="Nom" v-model="account.last_name" required />
         <v-text-field label="Email" v-model="account.email" required />
         <v-text-field
           label="Password"
@@ -12,6 +14,13 @@
         />
         <v-btn color="primary" type="submit">Inscription</v-btn>
       </form>
+
+      <div style="margin-top: 1em">
+        or
+        <router-link :to="{ name: 'Register' }">
+          login with an existing account
+        </router-link>
+      </div>
     </v-card-text>
   </v-card>
 </template>
