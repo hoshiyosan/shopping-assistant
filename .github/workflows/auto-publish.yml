@@ -16,7 +16,7 @@ on:
 env:
   DOCKER_BACKEND_IMAGE_NAME: sylvanld/shopping-backend
   DOCKER_FRONTEND_IMAGE_NAME: sylvanld/shopping-frontend
-  DOCKER_REGISTRY_URL: hub.docker.com
+  DOCKER_REGISTRY_URL: docker.io
 
 jobs:
   publish-frontend:
