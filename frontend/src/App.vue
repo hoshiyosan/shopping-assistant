@@ -6,7 +6,14 @@
       :nav-actions="navActions"
     />
 
-    <v-sheet style="position: relative; margin-top: 48px; height: 100%">
+    <v-sheet
+      style="
+        position: relative;
+        margin-top: 48px;
+        padding-bottom: 100px;
+        height: 100%;
+      "
+    >
       <v-container>
         <router-view />
       </v-container>

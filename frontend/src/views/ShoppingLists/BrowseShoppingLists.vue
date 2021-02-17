@@ -1,5 +1,5 @@
 <template>
-  <main style="position: relative">
+  <v-container style="position: relative">
     <h2><v-icon>mdi-clipboard-list</v-icon> Listes de courses</h2>
 
     <div class="actions" style="position: absolute; right: 0; top: 8px">
@@ -26,7 +26,7 @@
         </div>
       </template>
     </shoppinglists-list>
-  </main>
+  </v-container>
 </template>
 
 <script>

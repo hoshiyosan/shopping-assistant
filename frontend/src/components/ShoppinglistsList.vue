@@ -12,6 +12,9 @@
 
         <v-list-item-content>
           <v-list-item-title v-html="shoppingList.name"></v-list-item-title>
+          <v-list-item-subtitle>
+            {{ shoppingList.created | showDate }}
+          </v-list-item-subtitle>
         </v-list-item-content>
 
         <v-list-item-action>

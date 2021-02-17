@@ -1,4 +1,6 @@
+from datetime import datetime
 from typing import List
+from pydantic import Field
 from shopping_assistant.middleware.schemas import MongoModel, BaseModel
 
 
@@ -17,6 +19,7 @@ class ShoppingListRecipe(BaseModel):
 
 class ShoppingListSummary(MongoModel):
     name: str
+    created: datetime = Field(default_factory=datetime.now)
 
 
 class ShoppingList(ShoppingListSummary):
