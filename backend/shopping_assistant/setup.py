@@ -6,6 +6,7 @@ setuptools.setup(
     version="0.0.1",
     packages=setuptools.find_packages(),
     install_requires=[
+        "bcrypt==3.2.0",
         "fastapi==0.63.0",
         "passlib==1.7.4",
         "pydantic==1.7.3",
