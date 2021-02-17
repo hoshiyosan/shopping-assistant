@@ -1,0 +1,45 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Auto Publish
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  DOCKER_BACKEND_IMAGE_NAME: sylvanld/shopping-backend
+  DOCKER_FRONTEND_IMAGE_NAME: sylvanld/shopping-frontend
+  DOCKER_REGISTRY_URL: hub.docker.com
+
+jobs:
+  publish-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      # Login to docker hub registry
+      - name: Login to docker registry
+        uses: actions-hub/docker/login@master
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_REGISTRY_URL: ${{ env.DOCKER_REGISTRY_URL }}
+          
+      # Build backend's docker image
+      - name: Build backend image
+        if: success()
+        run: docker build -t ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_BACKEND_IMAGE_NAME }} backend/
+      
+      # Publish backend image to hub.docker.com
+      - name: Publish backend image
+        if: success()
+        run: docker push ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_BACKEND_IMAGE_NAME }}
