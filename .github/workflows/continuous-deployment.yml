@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Auto Publish
+name: CI
 
 # Controls when the action will run. 
 on:
@@ -17,6 +17,7 @@ env:
   DOCKER_BACKEND_IMAGE_NAME: sylvanld/shopping-backend
   DOCKER_FRONTEND_IMAGE_NAME: sylvanld/shopping-frontend
   DOCKER_REGISTRY_URL: docker.io
+  DOCKER_SWARM_HOST: ${{secrets.DOCKER_SWARM_HOST}}
 
 jobs:
   publish-backend:
@@ -60,3 +61,17 @@ jobs:
       - name: Publish frontend image
         if: success()
         run: docker push ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_FRONTEND_IMAGE_NAME }}
+        
+  deploy-swarm:
+    runs-on: ubuntu-latest
+    needs:
+      - publish-frontend
+      - publish-backend
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Deploy shopping app containers
+        run: DOCKER_HOST=${{env.DOCKER_SWARM_HOST}} docker stack deploy --compose-file deploy-shopping.yml shopping --resolve-image always
+
