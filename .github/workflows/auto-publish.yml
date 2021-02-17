@@ -19,7 +19,7 @@ env:
   DOCKER_REGISTRY_URL: docker.io
 
 jobs:
-  publish-frontend:
+  publish-backend:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,3 +39,24 @@ jobs:
       - name: Publish backend image
         if: success()
         run: docker push ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_BACKEND_IMAGE_NAME }}
+        
+  publish-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      # Login to docker hub registry
+      - name: Login to docker registry
+        run: docker login -u="${{ secrets.DOCKER_USERNAME }}" -p="${{ secrets.DOCKER_PASSWORD }}" ${{ env.DOCKER_REGISTRY_URL }}
+          
+      # Build frontend's docker image
+      - name: Build frontend image
+        if: success()
+        run: docker build -t ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_FRONTEND_IMAGE_NAME }} frontend/
+      
+      # Publish frontend image to hub.docker.com
+      - name: Publish frontend image
+        if: success()
+        run: docker push ${{ env.DOCKER_REGISTRY_URL }}/${{ env.DOCKER_FRONTEND_IMAGE_NAME }}
