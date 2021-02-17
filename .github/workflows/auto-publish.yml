@@ -28,7 +28,7 @@ jobs:
       
       # Login to docker hub registry
       - name: Login to docker registry
-        run: docker login -u="${{ secrets.DOCKER_USERNAME }}" -p="${{ secrets.DOCKER_PASSWORD }}" ${{DOCKER_REGISTRY_URL}}
+        run: docker login -u="${{ secrets.DOCKER_USERNAME }}" -p="${{ secrets.DOCKER_PASSWORD }}" ${{ env.DOCKER_REGISTRY_URL }}
           
       # Build backend's docker image
       - name: Build backend image
