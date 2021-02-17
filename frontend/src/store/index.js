@@ -21,6 +21,7 @@ export default new Vuex.Store({
   actions: {
     initApp({ dispatch }) {
       dispatch('ingredients/loadUnits', null, { root: true });
+      dispatch('ingredients/loadCategories', null, { root: true });
     }
   }
 })
