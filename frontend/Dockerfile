@@ -7,7 +7,9 @@ COPY . .
 RUN npm run build
 
 # étape de production
-FROM nginx:stable-alpine as production-stage
+FROM nginx:stable-alpine as production-stage 
 COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY docker-bootstrap.sh .
+
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["./docker-bootstrap.sh", "/usr/share/nginx/html"]
