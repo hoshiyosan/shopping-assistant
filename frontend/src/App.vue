@@ -1,13 +1,12 @@
 <template>
   <v-app>
     <main-navigation
-      v-if="authenticated"
       :title="app.title"
       :subtitle="app.subtitle"
       :nav-actions="navActions"
     />
 
-    <v-sheet style="position: relative; height: 100%">
+    <v-sheet style="position: relative; margin-top: 48px; height: 100%">
       <v-container>
         <router-view />
       </v-container>
