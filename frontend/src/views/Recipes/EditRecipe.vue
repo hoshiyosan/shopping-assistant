@@ -83,6 +83,11 @@ export default {
         .dispatch("recipes/update", this.recipe)
         .then(() => this.$router.push({ name: "BrowseRecipes" }));
     },
+    deleteRecipe() {
+      this.$store
+        .dispatch("recipes/delete", this.recipe._id)
+        .then(() => this.$router.push({ name: "BrowseRecipes" }));
+    },
   },
 };
 </script>
