@@ -22,6 +22,18 @@ export default {
         },
         delete(context, shoppingListUID) {
             return shoppingListsAPI.delete(shoppingListUID);
+        },
+        addRecipe(context, { shoppingListUID, recipeData }) {
+            // load full shopping list object
+            return shoppingListsAPI.get(shoppingListUID)
+                .then((shoppingList) => {
+                    // add recipe to shoppingList object
+                    shoppingList.recipes.push(recipeData);
+                    console.log(shoppingList)
+                    // update object in API
+                    shoppingListsAPI.update(shoppingList)
+                        .then(() => { return true })
+                })
         }
     }
 }

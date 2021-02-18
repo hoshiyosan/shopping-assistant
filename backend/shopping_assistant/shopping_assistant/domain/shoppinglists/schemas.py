@@ -2,13 +2,7 @@ from datetime import datetime
 from typing import List
 from pydantic import Field
 from shopping_assistant.middleware.schemas import MongoModel, BaseModel
-
-
-class IngredientQuantity(BaseModel):
-    ingredient: str
-    quantity: float = None
-    unit: str = None
-
+from ..recipes.schemas import IngredientQuantity
 
 class ShoppingListRecipe(BaseModel):
     uid: str

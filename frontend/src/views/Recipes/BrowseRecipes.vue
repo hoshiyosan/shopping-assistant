@@ -20,13 +20,14 @@
           <v-btn icon @click="editRecipe(slot.recipe._id)">
             <v-icon>mdi-pencil</v-icon>
           </v-btn>
-          <v-btn icon @click="openAddToShoppingListDialog(slot.recipe)">
+          <v-btn icon @click="startAddingToShoppingList(slot.recipe)">
             <v-icon>mdi-clipboard-list</v-icon>
           </v-btn>
         </div>
       </template>
     </recipes-list>
 
+    <!--
     <v-dialog v-model="isAddingRecipe" width="500">
       <v-card>
         <v-card-title class="headline grey lighten-2">
@@ -47,16 +48,22 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    -->
+    <add-shoppinglist-recipe-dialog
+      v-model="isAddingRecipe"
+      :recipe="selectedRecipe"
+    />
   </v-container>
 </template>
 
 
 <script>
 import RecipesList from "@/components/RecipesList";
-import SelectShoppingList from "@/components/SelectShoppingList";
+//import SelectShoppingList from "@/components/SelectShoppingList";
+import AddShoppinglistRecipeDialog from "@/components/AddShoppinglistRecipeDialog";
 
 export default {
-  components: { RecipesList, SelectShoppingList },
+  components: { RecipesList, AddShoppinglistRecipeDialog },
   data() {
     return {
       search: "",
@@ -88,22 +95,9 @@ export default {
         });
       });
     },
-    openAddToShoppingListDialog(recipe) {
+    startAddingToShoppingList(recipe) {
       this.selectedRecipe = recipe;
       this.isAddingRecipe = true;
-    },
-    cancelAddToShoppingList() {
-      this.selectedRecipe = null;
-      this.isAddingRecipe = false;
-    },
-    onShoppingListSelected(shoppingList) {
-      alert(
-        "Adding recipe " +
-          this.selectedRecipe._id +
-          " to shoppingList " +
-          shoppingList._id +
-          " (not implemented)"
-      );
     },
   },
 };

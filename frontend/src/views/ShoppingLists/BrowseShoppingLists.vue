@@ -30,8 +30,6 @@
 </template>
 
 <script>
-// TODO: remove
-
 import ShoppinglistsList from "@/components/ShoppinglistsList";
 
 export default {

@@ -2,7 +2,8 @@
   <v-select
     :items="shoppingLists"
     item-text="name"
-    label="Selectionnez des listes de courses"
+    label="Selectionnez une liste de courses"
+    prepend-icon="mdi-clipboard-list"
     @change="onShoppingListChange"
     return-object
   ></v-select>
@@ -13,6 +14,9 @@ export default {
   data() {
     return { shoppingLists: [] };
   },
+  props: {
+    value: Object,
+  },
   mounted() {
     this.$store
       .dispatch("shoppinglists/search", "")
@@ -20,7 +24,7 @@ export default {
   },
   methods: {
     onShoppingListChange(shoppingList) {
-      this.$emit("selected", shoppingList);
+      this.$emit("input", shoppingList);
     },
   },
 };
